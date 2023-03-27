@@ -6,6 +6,7 @@ from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
+from django.http import HttpResponse
 
 from . import settings as la_settings
 from .utils import login_as
@@ -90,7 +91,7 @@ def user_login(request, user_id):
         )
         return redirect(request.META.get("HTTP_REFERER", "/"))
 
-    return redirect(la_settings.LOGIN_REDIRECT)
+    return HttpResponse()
 
 
 def user_logout(request):

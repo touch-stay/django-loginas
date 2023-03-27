@@ -14,7 +14,22 @@
     </form>
     <script>
 	django.jQuery(function() {
-          django.jQuery('#loginas-link').click(function() {
+        django.jQuery('#loginas-form').on('submit', function(event) {
+               event.preventDefault();
+               django.jQuery.ajax({
+                   url: django.jQuery(this).attr('action'),
+                   type: django.jQuery(this).attr('method'),
+                   data: django.jQuery(this).serialize(),
+                   success: function(response, textStatus, jqXHR) {
+                        localStorage.setItem('tsUserToken', 'loginAs');
+	                    window.location.href = '/';
+                   },
+                   error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("Error: " + errorThrown);
+                   }
+           });
+        });
+        django.jQuery('#loginas-link').click(function() {
             django.jQuery('#loginas-form').submit();
             return false;
           });
