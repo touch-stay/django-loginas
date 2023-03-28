@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseForbidden
 
 from . import settings as la_settings
 from .utils import login_as
@@ -78,7 +78,7 @@ def user_login(request, user_id):
             extra_tags=la_settings.MESSAGE_EXTRA_TAGS,
             fail_silently=True,
         )
-        return HttpResponse()
+        return HttpResponseForbidden()
 
     try:
         login_as(user, request)
@@ -89,7 +89,7 @@ def user_login(request, user_id):
             extra_tags=la_settings.MESSAGE_EXTRA_TAGS,
             fail_silently=True,
         )
-        return HttpResponse()
+        return HttpResponseBadRequest()
 
     return HttpResponse()
 
