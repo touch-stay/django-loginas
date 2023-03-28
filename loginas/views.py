@@ -78,7 +78,7 @@ def user_login(request, user_id):
             extra_tags=la_settings.MESSAGE_EXTRA_TAGS,
             fail_silently=True,
         )
-        return redirect(request.META.get("HTTP_REFERER", "/admin"))
+        return redirect('/admin')
 
     try:
         login_as(user, request)
@@ -89,7 +89,7 @@ def user_login(request, user_id):
             extra_tags=la_settings.MESSAGE_EXTRA_TAGS,
             fail_silently=True,
         )
-        return redirect(request.META.get("HTTP_REFERER", "/admin"))
+        return redirect('/admin')
 
     return HttpResponse()
 
